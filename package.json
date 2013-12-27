@@ -1,0 +1,24 @@
+{
+  "name": "bitfinex",
+  "version": "0.0.1",
+  "gypfile": true,
+  "scripts": {
+    "start": "node test.js"
+  },
+  "description": "node.js wrapper for bitfinex cryptocurrency exchange",
+  "main": "index.js",
+  "keywords": [
+    "bitfinex",
+    "litecoin",
+    "bitcoin",
+    "cryptocurrency",
+    "exchange"
+  ],
+  "author": "Gabriel Ferrin <garf11235813@gmail.com>",
+  "dependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gferrin/bitfinex.git"
+  }
+}
