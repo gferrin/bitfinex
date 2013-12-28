@@ -6,7 +6,7 @@
     "start": "node test.js"
   },
   "description": "node.js wrapper for bitfinex cryptocurrency exchange",
-  "main": "index.js",
+  "main": "bitfinex.coffee",
   "keywords": [
     "bitfinex",
     "litecoin",
@@ -16,8 +16,8 @@
   ],
   "author": "Gabriel Ferrin <garf11235813@gmail.com>",
   "dependencies": {
-    "jquery": "~1.8.3",
-    "request": "~2.30.0"
+    "request": "~2.30.0",
+    "coffee-script": "~1.6.3"
   },
   "repository": {
     "type": "git",
