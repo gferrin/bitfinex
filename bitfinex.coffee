@@ -13,21 +13,16 @@ module.exports = class Bitfinex
 		@url = "https://api.bitfinex.com"
 		@key = key
 		@secret = secret
-		@nonce = 0
+		@nonce = Math.round((new Date()).getTime() / 1000)
 
 	_nonce: () ->
 
-		nonce = Math.round((new Date()).getTime() / 1000)
-		if @nonce is nonce
-			return @nonce++
-		else 
-			@nonce = nonce
-			return nonce
+		return @nonce++
 
 	make_request: (sub_path, params, cb) ->
 
 		if !@key or !@secret
-			cb(new Error("missing api key or secret"))
+			return cb(new Error("missing api key or secret"))
 
 		path = '/v1/' + sub_path
 		url = @url + path
@@ -37,7 +32,6 @@ module.exports = class Bitfinex
 			request: path
 			nonce: nonce
 			options: params
-
 
 		payload = new Buffer(JSON.stringify(payload)).toString('base64')
 		signature = crypto.createHmac("sha384", @secret).update(payload).digest('hex')
@@ -49,11 +43,11 @@ module.exports = class Bitfinex
 
 		request({ url: url, method: "POST", headers: headers }, cb)   
 
-		make_public_request: (path, cb) ->
+	make_public_request: (path, cb) ->
 
-			url = @url + '/v1/' + path	
+		url = @url + '/v1/' + path	
 
-			request({ url: url, method: "GET"}, cb)    
+		request({ url: url, method: "GET"}, cb)    
 
 	#####################################
 	########## PUBLIC REQUESTS ##########

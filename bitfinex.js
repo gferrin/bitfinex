@@ -15,24 +15,17 @@
       this.url = "https://api.bitfinex.com";
       this.key = key;
       this.secret = secret;
-      this.nonce = 0;
+      this.nonce = Math.round((new Date()).getTime() / 1000);
     }
 
     Bitfinex.prototype._nonce = function() {
-      var nonce;
-      nonce = Math.round((new Date()).getTime() / 1000);
-      if (this.nonce === nonce) {
-        return this.nonce++;
-      } else {
-        this.nonce = nonce;
-        return nonce;
-      }
+      return this.nonce++;
     };
 
     Bitfinex.prototype.make_request = function(sub_path, params, cb) {
       var headers, nonce, path, payload, signature, url;
       if (!this.key || !this.secret) {
-        cb(new Error("missing api key or secret"));
+        return cb(new Error("missing api key or secret"));
       }
       path = '/v1/' + sub_path;
       url = this.url + path;
@@ -49,20 +42,20 @@
         'X-BFX-PAYLOAD': payload,
         'X-BFX-SIGNATURE': signature
       };
-      request({
+      return request({
         url: url,
         method: "POST",
         headers: headers
       }, cb);
-      return {
-        make_public_request: function(path, cb) {
-          url = this.url + '/v1/' + path;
-          return request({
-            url: url,
-            method: "GET"
-          }, cb);
-        }
-      };
+    };
+
+    Bitfinex.prototype.make_public_request = function(path, cb) {
+      var url;
+      url = this.url + '/v1/' + path;
+      return request({
+        url: url,
+        method: "GET"
+      }, cb);
     };
 
     Bitfinex.prototype.ticker = function(symbol, cb) {
