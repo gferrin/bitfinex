@@ -10,8 +10,6 @@
 
   qs = require('querystring');
 
-  require('coffee-script');
-
   module.exports = Bitfinex = (function() {
     function Bitfinex(key, secret) {
       this.url = "https://api.bitfinex.com";
