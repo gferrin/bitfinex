@@ -65,6 +65,38 @@
       };
     };
 
+    Bitfinex.prototype.ticker = function(symbol, cb) {
+      return this.make_public_request('ticker/' + symbol, cb);
+    };
+
+    Bitfinex.prototype.today = function(symbol, cb) {
+      return this.make_public_request('today/' + symbol, cb);
+    };
+
+    Bitfinex.prototype.candles = function(symbol, cb) {
+      return this.make_public_request('candles/' + symbol, cb);
+    };
+
+    Bitfinex.prototype.lendbook = function(currency, cb) {
+      return this.make_public_request('lendbook/' + currency, cb);
+    };
+
+    Bitfinex.prototype.orderbook = function(symbol, cb) {
+      return this.make_public_request('candles/' + symbol, cb);
+    };
+
+    Bitfinex.prototype.trades = function(symbol, cb) {
+      return this.make_public_request('trades/' + symbol, cb);
+    };
+
+    Bitfinex.prototype.lends = function(currency, cb) {
+      return this.make_public_request('lends/' + currency, cb);
+    };
+
+    Bitfinex.prototype.get_symbols = function(cb) {
+      return this.make_public_request('symbols', cb);
+    };
+
     Bitfinex.prototype.new_order = function(symbol, amount, price, exchange, side, type, is_hidden, cb) {
       var params;
       params = {

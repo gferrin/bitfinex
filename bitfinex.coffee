@@ -59,37 +59,37 @@ module.exports = class Bitfinex
 	########## PUBLIC REQUESTS ##########
 	#####################################                            
 
-	# ticker: (symbol, cb) ->
+	ticker: (symbol, cb) ->
 
-	# 	@make_public_request('ticker/' + symbol, cb)
+		@make_public_request('ticker/' + symbol, cb)
 
-	# today: (symbol, cb) ->
+	today: (symbol, cb) ->
 
-	# 	@make_public_request('today/' + symbol, cb)		
+		@make_public_request('today/' + symbol, cb)		
 
-	# candles: (symbol, cb) ->
+	candles: (symbol, cb) ->
 
-	# 	@make_public_request('candles/' + symbol, cb)	
+		@make_public_request('candles/' + symbol, cb)	
 
-	# lendbook: (currency, cb) ->
+	lendbook: (currency, cb) ->
 
-	# 	@make_public_request('lendbook/' + currency, cb)	
+		@make_public_request('lendbook/' + currency, cb)	
 
-	# orderbook: (symbol, cb) ->
+	orderbook: (symbol, cb) ->
 
-	# 	@make_public_request('candles/' + symbol, cb)
+		@make_public_request('candles/' + symbol, cb)
 
-	# trades: (symbol, cb) ->
+	trades: (symbol, cb) ->
 
-	# 	@make_public_request('trades/' + symbol, cb)
+		@make_public_request('trades/' + symbol, cb)
 
-	# lends: (currency, cb) ->
+	lends: (currency, cb) ->
 
-	# 	@make_public_request('lends/' + currency, cb)		
+		@make_public_request('lends/' + currency, cb)		
 
-	# get_symbols: (cb) ->
+	get_symbols: (cb) ->
 
-	# 	@make_public_request('symbols', cb)
+		@make_public_request('symbols', cb)
 
 	# #####################################
 	# ###### AUTHENTICATED REQUESTS #######
