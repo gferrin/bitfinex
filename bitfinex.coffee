@@ -47,53 +47,53 @@ module.exports = class Bitfinex
 			'X-BFX-PAYLOAD': payload
 			'X-BFX-SIGNATURE': signature
 
-		request({ url: url, method: "POST", headers: headers }, cb)       
+		request({ url: url, method: "POST", headers: headers }, cb)   
+
+		make_public_request: (path, cb) ->
+
+			url = @url + '/v1/' + path	
+
+			request({ url: url, method: "GET"}, cb)    
 
 	#####################################
 	########## PUBLIC REQUESTS ##########
 	#####################################                            
 
-	make_public_request: (path, cb) ->
+	# ticker: (symbol, cb) ->
 
-		url = @url + '/v1/' + path	
+	# 	@make_public_request('ticker/' + symbol, cb)
 
-		request({ url: url, method: "GET"}, cb)
+	# today: (symbol, cb) ->
 
-	ticker: (symbol, cb) ->
+	# 	@make_public_request('today/' + symbol, cb)		
 
-		@make_public_request('ticker/' + symbol, cb)
+	# candles: (symbol, cb) ->
 
-	today: (symbol, cb) ->
+	# 	@make_public_request('candles/' + symbol, cb)	
 
-		@make_public_request('today/' + symbol, cb)		
+	# lendbook: (currency, cb) ->
 
-	candles: (symbol, cb) ->
+	# 	@make_public_request('lendbook/' + currency, cb)	
 
-		@make_public_request('candles/' + symbol, cb)	
+	# orderbook: (symbol, cb) ->
 
-	lendbook: (currency, cb) ->
+	# 	@make_public_request('candles/' + symbol, cb)
 
-		@make_public_request('lendbook/' + currency, cb)	
+	# trades: (symbol, cb) ->
 
-	orderbook: (symbol, cb) ->
+	# 	@make_public_request('trades/' + symbol, cb)
 
-		@make_public_request('candles/' + symbol, cb)
+	# lends: (currency, cb) ->
 
-	trades: (symbol, cb) ->
+	# 	@make_public_request('lends/' + currency, cb)		
 
-		@make_public_request('trades/' + symbol, cb)
+	# get_symbols: (cb) ->
 
-	lends: (currency, cb) ->
+	# 	@make_public_request('symbols', cb)
 
-		@make_public_request('lends/' + currency, cb)		
-
-	get_symbols: (cb) ->
-
-		@make_public_request('symbols', cb)
-
-	#####################################
-	###### AUTHENTICATED REQUESTS #######
-	#####################################   
+	# #####################################
+	# ###### AUTHENTICATED REQUESTS #######
+	# #####################################   
 
 	new_order: (symbol, amount, price, exchange, side, type, is_hidden, cb) ->
 
@@ -127,7 +127,7 @@ module.exports = class Bitfinex
 
 		@make_request('order/cancel', params, cb)  
 
-	cancel_multiple_orders: (order_ids, ) ->
+	cancel_multiple_orders: (order_ids, cb) ->
 
 		params = 
 			order_ids: order_ids
