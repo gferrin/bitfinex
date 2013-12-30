@@ -162,7 +162,7 @@
     Bitfinex.prototype.new_offer = function(symbol, amount, rate, period, direction, insurance_option, cb) {
       var params;
       params = {
-        symbol: symbol,
+        currency: currency,
         amount: amount,
         rate: rate,
         period: period,

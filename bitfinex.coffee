@@ -155,7 +155,7 @@ module.exports = class Bitfinex
 	new_offer: (symbol, amount, rate, period, direction, insurance_option, cb) ->
 
 		params = 
-			symbol: symbol
+			currency: currency
 			amount: amount
 			rate: rate
 			period: period
