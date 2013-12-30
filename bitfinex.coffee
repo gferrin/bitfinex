@@ -35,8 +35,6 @@ module.exports = class Bitfinex
 		for key, value of params
 			payload[key] = value
 
-		console.log payload
-
 		payload = new Buffer(JSON.stringify(payload)).toString('base64')
 		signature = crypto.createHmac("sha384", @secret).update(payload).digest('hex')
 
