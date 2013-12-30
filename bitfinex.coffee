@@ -31,7 +31,11 @@ module.exports = class Bitfinex
 		payload = 
 			request: path
 			nonce: nonce
-			options: params
+
+		for key, value of params
+			payload[key] = value
+
+		console.log payload
 
 		payload = new Buffer(JSON.stringify(payload)).toString('base64')
 		signature = crypto.createHmac("sha384", @secret).update(payload).digest('hex')
@@ -89,7 +93,7 @@ module.exports = class Bitfinex
 	# ###### AUTHENTICATED REQUESTS #######
 	# #####################################   
 
-	new_order: (symbol, amount, price, exchange, side, type, is_hidden, cb) ->
+	new_order: (symbol, amount, price, exchange, side, type, cb) ->
 
 		params = 
 			symbol: symbol
@@ -98,8 +102,9 @@ module.exports = class Bitfinex
 			exchange: exchange
 			side: side
 			type: type
-			is_hidden: is_hidden 
+			# is_hidden: is_hidden 
 
+		console.log params
 		@make_request('order/new', params, cb)  
 
 	multiple_new_orders: (symbol, amount, price, exchange, side, type, cb) ->

@@ -23,7 +23,7 @@
     };
 
     Bitfinex.prototype.make_request = function(sub_path, params, cb) {
-      var headers, nonce, path, payload, signature, url;
+      var headers, key, nonce, path, payload, signature, url, value;
       if (!this.key || !this.secret) {
         return cb(new Error("missing api key or secret"));
       }
@@ -32,9 +32,13 @@
       nonce = JSON.stringify(this._nonce());
       payload = {
         request: path,
-        nonce: nonce,
-        options: params
+        nonce: nonce
       };
+      for (key in params) {
+        value = params[key];
+        payload[key] = value;
+      }
+      console.log(payload);
       payload = new Buffer(JSON.stringify(payload)).toString('base64');
       signature = crypto.createHmac("sha384", this.secret).update(payload).digest('hex');
       headers = {
@@ -90,7 +94,7 @@
       return this.make_public_request('symbols', cb);
     };
 
-    Bitfinex.prototype.new_order = function(symbol, amount, price, exchange, side, type, is_hidden, cb) {
+    Bitfinex.prototype.new_order = function(symbol, amount, price, exchange, side, type, cb) {
       var params;
       params = {
         symbol: symbol,
@@ -98,9 +102,9 @@
         price: price,
         exchange: exchange,
         side: side,
-        type: type,
-        is_hidden: is_hidden
+        type: type
       };
+      console.log(params);
       return this.make_request('order/new', params, cb);
     };
 

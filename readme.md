@@ -11,7 +11,7 @@ var Bitfinex = require('bitfinex');
 
 var bitfinex = new Bitfinex(your_key, your_secret);
 
-bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "limit", false, 
+bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "exchange limit", 
 	function(err, res, order_id){
 		console.log(order_id);
 });
