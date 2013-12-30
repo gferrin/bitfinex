@@ -152,10 +152,10 @@ module.exports = class Bitfinex
 
 		@make_request('mytrades', params, cb)  
 
-	new_offer: (currency, amount, rate, period, direction, insurance_option, cb) ->
+	new_offer: (symbol, amount, rate, period, direction, insurance_option, cb) ->
 
 		params = 
-			currency: currency
+			symbol: symbol
 			amount: amount
 			rate: rate
 			period: period
