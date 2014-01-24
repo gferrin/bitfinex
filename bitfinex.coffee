@@ -73,7 +73,7 @@ module.exports = class Bitfinex
 
 	orderbook: (symbol, cb) ->
 
-		@make_public_request('candles/' + symbol, cb)
+		@make_public_request('book/' + symbol, cb)
 
 	trades: (symbol, cb) ->
 
