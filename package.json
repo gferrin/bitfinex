@@ -1,6 +1,6 @@
 {
   "name": "bitfinex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "gypfile": true,
   "scripts": {
     "start": "node test.js"
@@ -14,7 +14,10 @@
     "cryptocurrency",
     "exchange"
   ],
-  "author": "Gabriel Ferrin <garf11235813@gmail.com>",
+  "author": {
+    "name": "Gabriel Ferrin",
+    "email": "garf11235813@gmail.com"},
+  "contributors": "Nick Addison",
   "dependencies": {
     "request": "~2.30.0",
     "querystring": "~0.2.0",
@@ -22,6 +25,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gferrin/bitfinex.git"
+    "url": "git://github.com/naddison36/bitfinex.git
   }
 }
