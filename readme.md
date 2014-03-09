@@ -4,6 +4,12 @@ This is a node.js wrapper for the Bitfinex [API](https://bitfinex.com/pages/api)
 
 `npm install bitfinex`
 
+### coffee-script installation
+`npm install -g coffee-script`
+
+### Compile coffee-script
+`coffee --compile bitfinex.coffee`
+
 ### Example
 
 ```js
