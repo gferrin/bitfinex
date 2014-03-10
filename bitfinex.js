@@ -103,6 +103,7 @@
         side: side,
         type: type
       };
+      console.log(params);
       return this.make_request('order/new', params, cb);
     };
 
@@ -122,7 +123,7 @@
     Bitfinex.prototype.cancel_order = function(order_id, cb) {
       var params;
       params = {
-        order_id: order_id
+        order_id: parseInt(order_id)
       };
       return this.make_request('order/cancel', params, cb);
     };
@@ -130,7 +131,9 @@
     Bitfinex.prototype.cancel_multiple_orders = function(order_ids, cb) {
       var params;
       params = {
-        order_ids: order_ids
+        order_ids: order_ids.map(function(id) {
+          return parseInt(id);
+        })
       };
       return this.make_request('order/cancel/multi', params, cb);
     };

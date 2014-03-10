@@ -102,6 +102,7 @@ module.exports = class Bitfinex
 			type: type
 			# is_hidden: is_hidden 
 
+		console.log params
 		@make_request('order/new', params, cb)  
 
 	multiple_new_orders: (symbol, amount, price, exchange, side, type, cb) ->
@@ -119,14 +120,15 @@ module.exports = class Bitfinex
 	cancel_order: (order_id, cb) ->
 
 		params = 
-			order_id: order_id
+			order_id: parseInt(order_id)
 
 		@make_request('order/cancel', params, cb)  
 
 	cancel_multiple_orders: (order_ids, cb) ->
 
 		params = 
-			order_ids: order_ids
+			order_ids: order_ids.map( (id) ->
+			    return parseInt(id) )
 
 		@make_request('order/cancel/multi', params, cb)
 
@@ -191,5 +193,3 @@ module.exports = class Bitfinex
 	wallet_balances: (cb) ->
 
 		@make_request('balances', {}, cb)
-
-
