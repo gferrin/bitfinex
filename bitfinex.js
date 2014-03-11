@@ -90,7 +90,7 @@
     };
 
     Bitfinex.prototype.get_symbols = function(cb) {
-      return this.make_public_request('symbols', cb);
+      return this.make_public_request('symbols/', cb);
     };
 
     Bitfinex.prototype.new_order = function(symbol, amount, price, exchange, side, type, cb) {

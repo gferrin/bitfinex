@@ -85,7 +85,7 @@ module.exports = class Bitfinex
 
 	get_symbols: (cb) ->
 
-		@make_public_request('symbols', cb)
+		@make_public_request('symbols/', cb)
 
 	# #####################################
 	# ###### AUTHENTICATED REQUESTS #######
