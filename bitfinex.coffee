@@ -102,7 +102,6 @@ module.exports = class Bitfinex
 			type: type
 			# is_hidden: is_hidden 
 
-		console.log params
 		@make_request('order/new', params, cb)  
 
 	multiple_new_orders: (symbol, amount, price, exchange, side, type, cb) ->
@@ -141,7 +140,7 @@ module.exports = class Bitfinex
 
 	active_orders: (cb) ->
 
-		@make_request('orders/', {}, cb)  
+		@make_request('orders', {}, cb)  
 
 	active_positions: (cb) ->
 

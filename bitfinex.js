@@ -103,7 +103,6 @@
         side: side,
         type: type
       };
-      console.log(params);
       return this.make_request('order/new', params, cb);
     };
 
@@ -147,7 +146,7 @@
     };
 
     Bitfinex.prototype.active_orders = function(cb) {
-      return this.make_request('orders/', {}, cb);
+      return this.make_request('orders', {}, cb);
     };
 
     Bitfinex.prototype.active_positions = function(cb) {
