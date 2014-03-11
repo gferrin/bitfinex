@@ -150,7 +150,7 @@
     };
 
     Bitfinex.prototype.active_positions = function(cb) {
-      return this.make_request('positions/', {}, cb);
+      return this.make_request('positions', {}, cb);
     };
 
     Bitfinex.prototype.past_trades = function(symbol, timestamp, limit_trades, cb) {
