@@ -48,8 +48,26 @@
       return request({
         url: url,
         method: "POST",
-        headers: headers
-      }, cb);
+        headers: headers,
+        timeout: 15000
+      }, function(err, response, body) {
+        var error, result;
+        if (err || response.statusCode !== 200) {
+          return cb(new Error(err != null ? err : {
+            err: response.statusCode
+          }));
+        }
+        try {
+          result = JSON.parse(body);
+        } catch (_error) {
+          error = _error;
+          return cb(new Error(error));
+        }
+        if (result.message != null) {
+          return cb(new Error(result.message));
+        }
+        return cb(null, result);
+      });
     };
 
     Bitfinex.prototype.make_public_request = function(path, cb) {
@@ -57,8 +75,26 @@
       url = this.url + '/v1/' + path;
       return request({
         url: url,
-        method: "GET"
-      }, cb);
+        method: "GET",
+        timeout: 15000
+      }, function(err, response, body) {
+        var error, result;
+        if (err || response.statusCode !== 200) {
+          return cb(new Error(err != null ? err : {
+            err: response.statusCode
+          }));
+        }
+        try {
+          result = JSON.parse(body);
+        } catch (_error) {
+          error = _error;
+          return cb(new Error(error));
+        }
+        if (result.message != null) {
+          return cb(new Error(result.message));
+        }
+        return cb(null, result);
+      });
     };
 
     Bitfinex.prototype.ticker = function(symbol, cb) {

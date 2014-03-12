@@ -1,12 +1,16 @@
 {
   "name": "bitfinex",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "gypfile": true,
   "scripts": {
     "start": "node test.js"
   },
   "description": "node.js wrapper for bitfinex cryptocurrency exchange",
   "main": "bitfinex.js",
+  "scripts": {
+     "build": "coffee --bare --compile *.coffee",
+     "prepublish": "coffee --bare --compile *.coffee"
+  },
   "keywords": [
     "bitfinex",
     "litecoin",
@@ -21,7 +25,8 @@
   "dependencies": {
     "request": "~2.30.0",
     "querystring": "~0.2.0",
-    "crypto": "~0.0.3"
+    "crypto": "~0.0.3",
+    "coffee-script": ">= 1.3"
   },
   "repository": {
     "type": "git",
