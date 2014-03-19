@@ -147,7 +147,11 @@ module.exports = class Bitfinex
 		params = 
 			order_id: parseInt(order_id)
 
-		@make_request('order/cancel', params, cb)  
+		@make_request('order/cancel', params, cb)
+
+	cancel_all_orders: (cb) ->
+
+		@make_request('order/cancel/all', {}, cb)
 
 	cancel_multiple_orders: (order_ids, cb) ->
 
@@ -156,6 +160,19 @@ module.exports = class Bitfinex
 			    return parseInt(id) )
 
 		@make_request('order/cancel/multi', params, cb)
+
+	replace_order: (order_id, symbol, amount, price, exchange, side, type, cb) ->
+
+		params = 
+			order_id: parseInt(order_id)
+			symbol: symbol
+			amount: amount
+			price: price
+			exchange: exchange
+			side: side
+			type: type
+
+		@make_request('order/cancel/replace', params, cb)  
 
 	order_status: (order_id, cb) ->
 

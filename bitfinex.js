@@ -163,6 +163,10 @@
       return this.make_request('order/cancel', params, cb);
     };
 
+    Bitfinex.prototype.cancel_all_orders = function(cb) {
+      return this.make_request('order/cancel/all', {}, cb);
+    };
+
     Bitfinex.prototype.cancel_multiple_orders = function(order_ids, cb) {
       var params;
       params = {
@@ -171,6 +175,20 @@
         })
       };
       return this.make_request('order/cancel/multi', params, cb);
+    };
+
+    Bitfinex.prototype.replace_order = function(order_id, symbol, amount, price, exchange, side, type, cb) {
+      var params;
+      params = {
+        order_id: parseInt(order_id),
+        symbol: symbol,
+        amount: amount,
+        price: price,
+        exchange: exchange,
+        side: side,
+        type: type
+      };
+      return this.make_request('order/cancel/replace', params, cb);
     };
 
     Bitfinex.prototype.order_status = function(order_id, cb) {
