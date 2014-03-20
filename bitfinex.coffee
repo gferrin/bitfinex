@@ -45,13 +45,13 @@ module.exports = class Bitfinex
 
 		request { url: url, method: "POST", headers: headers, timeout: 15000 }, (err,response,body)->
 		    
-            if err || response.statusCode != 200
-                return cb new Error(err ? err : response.statusCode)
+            if err || (response.statusCode != 200 && response.statusCode != 400)
+                return cb new Error(err ? response.statusCode)
                 
             try
                 result = JSON.parse(body)
             catch error
-                return cb(new Error(error))
+                return cb(null, { messsage : body.toString() } )
             
             if result.message?
                 return cb new Error(result.message)
@@ -64,13 +64,13 @@ module.exports = class Bitfinex
 
 		request { url: url, method: "GET", timeout: 15000}, (err,response,body)->
 		    
-		    if err || response.statusCode != 200
-                return cb new Error(err ? err : response.statusCode)
+		    if err || (response.statusCode != 200 && response.statusCode != 400)
+                return cb new Error(err ? response.statusCode)
             
             try
                 result = JSON.parse(body)
             catch error
-                return cb(new Error(error))
+                return cb(null, { messsage : body.toString() } )
 
             if result.message?
                 return cb new Error(result.message)

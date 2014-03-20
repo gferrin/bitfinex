@@ -52,16 +52,16 @@
         timeout: 15000
       }, function(err, response, body) {
         var error, result;
-        if (err || response.statusCode !== 200) {
-          return cb(new Error(err != null ? err : {
-            err: response.statusCode
-          }));
+        if (err || (response.statusCode !== 200 && response.statusCode !== 400)) {
+          return cb(new Error(err != null ? err : response.statusCode));
         }
         try {
           result = JSON.parse(body);
         } catch (_error) {
           error = _error;
-          return cb(new Error(error));
+          return cb(null, {
+            messsage: body.toString()
+          });
         }
         if (result.message != null) {
           return cb(new Error(result.message));
@@ -79,16 +79,16 @@
         timeout: 15000
       }, function(err, response, body) {
         var error, result;
-        if (err || response.statusCode !== 200) {
-          return cb(new Error(err != null ? err : {
-            err: response.statusCode
-          }));
+        if (err || (response.statusCode !== 200 && response.statusCode !== 400)) {
+          return cb(new Error(err != null ? err : response.statusCode));
         }
         try {
           result = JSON.parse(body);
         } catch (_error) {
           error = _error;
-          return cb(new Error(error));
+          return cb(null, {
+            messsage: body.toString()
+          });
         }
         if (result.message != null) {
           return cb(new Error(result.message));
