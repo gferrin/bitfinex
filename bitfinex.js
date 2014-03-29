@@ -233,7 +233,7 @@
     Bitfinex.prototype.cancel_offer = function(offer_id, cb) {
       var params;
       params = {
-        order_id: order_id
+        order_id: offer_id
       };
       return this.make_request('offer/cancel', params, cb);
     };

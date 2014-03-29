@@ -213,7 +213,7 @@ module.exports = class Bitfinex
 	cancel_offer: (offer_id, cb) ->
 
 		params = 
-			order_id: order_id
+			order_id: offer_id
 
 		@make_request('offer/cancel', params, cb) 
 
