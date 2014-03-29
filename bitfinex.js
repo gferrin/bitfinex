@@ -217,7 +217,7 @@
       return this.make_request('mytrades', params, cb);
     };
 
-    Bitfinex.prototype.new_offer = function(symbol, amount, rate, period, direction, insurance_option, cb) {
+    Bitfinex.prototype.new_offer = function(currency, amount, rate, period, direction, insurance_option, cb) {
       var params;
       params = {
         currency: currency,
