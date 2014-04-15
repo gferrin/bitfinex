@@ -114,7 +114,10 @@
     };
 
     Bitfinex.prototype.orderbook = function(symbol, cb) {
-      return this.make_public_request('book/' + symbol, cb);
+      var maxOrders, uri;
+      maxOrders = 50;
+      uri = 'book/' + symbol + '/?limit_bids=' + maxOrders + '&limit_asks=' + maxOrders;
+      return this.make_public_request(uri, cb);
     };
 
     Bitfinex.prototype.trades = function(symbol, cb) {
