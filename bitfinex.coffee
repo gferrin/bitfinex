@@ -43,14 +43,40 @@ module.exports = class Bitfinex
 			'X-BFX-PAYLOAD': payload
 			'X-BFX-SIGNATURE': signature
 
-		request({ url: url, method: "POST", headers: headers }, cb)   
+		request { url: url, method: "POST", headers: headers, timeout: 15000 }, (err,response,body)->
+		    
+            if err || (response.statusCode != 200 && response.statusCode != 400)
+                return cb new Error(err ? response.statusCode)
+                
+            try
+                result = JSON.parse(body)
+            catch error
+                return cb(null, { messsage : body.toString() } )
+            
+            if result.message?
+                return cb new Error(result.message)
 
+            cb null, result
+    
 	make_public_request: (path, cb) ->
 
 		url = @url + '/v1/' + path	
 
-		request({ url: url, method: "GET"}, cb)    
+		request { url: url, method: "GET", timeout: 15000}, (err,response,body)->
+		    
+		    if err || (response.statusCode != 200 && response.statusCode != 400)
+                return cb new Error(err ? response.statusCode)
+            
+            try
+                result = JSON.parse(body)
+            catch error
+                return cb(null, { messsage : body.toString() } )
 
+            if result.message?
+                return cb new Error(result.message)
+            
+            cb null, result
+    
 	#####################################
 	########## PUBLIC REQUESTS ##########
 	#####################################                            
@@ -73,8 +99,10 @@ module.exports = class Bitfinex
 
 	orderbook: (symbol, cb) ->
 
-		@make_public_request('book/' + symbol, cb)
-
+        maxOrders = 50
+        uri = 'book/' + symbol + '/?limit_bids=' + maxOrders + '&limit_asks=' + maxOrders
+        @make_public_request(uri, cb)
+    
 	trades: (symbol, cb) ->
 
 		@make_public_request('trades/' + symbol, cb)
@@ -85,7 +113,7 @@ module.exports = class Bitfinex
 
 	get_symbols: (cb) ->
 
-		@make_public_request('symbols', cb)
+		@make_public_request('symbols/', cb)
 
 	# #####################################
 	# ###### AUTHENTICATED REQUESTS #######
@@ -102,7 +130,6 @@ module.exports = class Bitfinex
 			type: type
 			# is_hidden: is_hidden 
 
-		console.log params
 		@make_request('order/new', params, cb)  
 
 	multiple_new_orders: (symbol, amount, price, exchange, side, type, cb) ->
@@ -120,16 +147,34 @@ module.exports = class Bitfinex
 	cancel_order: (order_id, cb) ->
 
 		params = 
-			order_id: order_id
+			order_id: parseInt(order_id)
 
-		@make_request('order/cancel', params, cb)  
+		@make_request('order/cancel', params, cb)
+
+	cancel_all_orders: (cb) ->
+
+		@make_request('order/cancel/all', {}, cb)
 
 	cancel_multiple_orders: (order_ids, cb) ->
 
 		params = 
-			order_ids: order_ids
+			order_ids: order_ids.map( (id) ->
+			    return parseInt(id) )
 
 		@make_request('order/cancel/multi', params, cb)
+
+	replace_order: (order_id, symbol, amount, price, exchange, side, type, cb) ->
+
+		params = 
+			order_id: parseInt(order_id)
+			symbol: symbol
+			amount: amount
+			price: price
+			exchange: exchange
+			side: side
+			type: type
+
+		@make_request('order/cancel/replace', params, cb)  
 
 	order_status: (order_id, cb) ->
 
@@ -155,7 +200,7 @@ module.exports = class Bitfinex
 
 		@make_request('mytrades', params, cb)  
 
-	new_offer: (symbol, amount, rate, period, direction, insurance_option, cb) ->
+	new_offer: (currency, amount, rate, period, direction, insurance_option, cb) ->
 
 		params = 
 			currency: currency
@@ -170,7 +215,7 @@ module.exports = class Bitfinex
 	cancel_offer: (offer_id, cb) ->
 
 		params = 
-			order_id: order_id
+			order_id: offer_id
 
 		@make_request('offer/cancel', params, cb) 
 
@@ -192,5 +237,3 @@ module.exports = class Bitfinex
 	wallet_balances: (cb) ->
 
 		@make_request('balances', {}, cb)
-
-
