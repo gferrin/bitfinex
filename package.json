@@ -1,6 +1,6 @@
 {
   "name": "bitfinex",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "gypfile": true,
   "scripts": {
     "start": "node test.js"
@@ -30,6 +30,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/naddison36/bitfinex.git"
+    "url": "git://github.com/gferrin/bitfinex.git"
   }
 }

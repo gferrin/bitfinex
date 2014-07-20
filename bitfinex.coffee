@@ -13,11 +13,11 @@ module.exports = class Bitfinex
 		@url = "https://api.bitfinex.com"
 		@key = key
 		@secret = secret
-		@nonce = Math.round((new Date()).getTime() / 1000)
+		@nonce = Math.ceil((new Date()).getTime() / 1000)
 
 	_nonce: () ->
 
-		return @nonce++
+		return ++@nonce
 
 	make_request: (sub_path, params, cb) ->
 
