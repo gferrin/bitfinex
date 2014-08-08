@@ -17,7 +17,7 @@ bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "exchange limit",
 });
 ```
 
-### Functions
+## Functions
 
 `ticker(symbol, cb)`
 
@@ -36,7 +36,7 @@ bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "exchange limit",
 `get_symbols(cb)`
 
 
-# AUTHENTICATED REQUESTS 
+### AUTHENTICATED REQUESTS 
 
 `new_order(symbol, amount, price, exchange, side, type, cb)`
 
