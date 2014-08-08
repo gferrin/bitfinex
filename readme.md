@@ -16,3 +16,56 @@ bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "exchange limit",
 		console.log(order_id);
 });
 ```
+
+### Functions
+
+`ticker(symbol, cb)`
+
+`today(symbol, cb)`		
+
+`candles(symbol, cb)`
+
+`lendbook(currency, cb)`	
+
+`orderbook(symbol, cb)`
+
+`trades(symbol, cb)`
+
+`lends(currency, cb)`	
+
+`get_symbols(cb)`
+
+
+# AUTHENTICATED REQUESTS 
+
+`new_order(symbol, amount, price, exchange, side, type, cb)`
+
+`multiple_new_orders(symbol, amount, price, exchange, side, type, cb)`
+
+`cancel_order(order_id, cb)`
+
+`cancel_all_orders(cb)`
+
+`cancel_multiple_orders(order_ids, cb)`
+
+`replace_order(order_id, symbol, amount, price, exchange, side, type, cb)`
+
+`order_status(order_id, cb)`
+
+`active_orders(cb)`
+
+`active_positions(cb)`
+
+`past_trades(symbol, timestamp, limit_trades, cb)`
+
+`new_offer(currency, amount, rate, period, direction, insurance_option, cb)`
+
+`cancel_offer(offer_id, cb)`
+
+`offer_status(order_id, cb)`
+
+`active_offers(cb)`
+
+`active_credits(cb)`
+
+`wallet_balances(cb)`
