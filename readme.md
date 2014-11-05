@@ -17,6 +17,11 @@ bitfinex.new_order("btcusd", 42, 802.7, "all", "buy", "exchange limit",
 });
 ```
 
+### Error
+
+If your getting the error `[Error: Nonce is too small.]` then your most likely
+running the same process twice using the same API keys.
+
 ## Functions
 
 `ticker(symbol, cb)`
