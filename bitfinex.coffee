@@ -200,6 +200,15 @@ module.exports = class Bitfinex
 
 		@make_request('mytrades', params, cb)  
 
+	new_deposit: (currency, method, wallet_name, cb) ->
+
+		params = 
+			currency: currency
+			method: method
+			wallet_name: wallet_name
+
+		@make_request('deposit/new', params, cb)  
+
 	new_offer: (currency, amount, rate, period, direction, insurance_option, cb) ->
 
 		params = 

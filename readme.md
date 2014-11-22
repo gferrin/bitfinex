@@ -43,6 +43,8 @@ running the same process twice using the same API keys.
 
 ##### AUTHENTICATED REQUESTS 
 
+`new_deposit(currency, method, wallet_name, cb)`
+
 `new_order(symbol, amount, price, exchange, side, type, cb)`
 
 `multiple_new_orders(symbol, amount, price, exchange, side, type, cb)`
