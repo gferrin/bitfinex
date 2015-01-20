@@ -6,10 +6,10 @@
     "start": "node test.js"
   },
   "description": "node.js wrapper for bitfinex cryptocurrency exchange",
-  "main": "bitfinex.js",
+  "main": "lib/bitfinex.js",
   "scripts": {
      "build": "coffee --bare --compile *.coffee",
-     "prepublish": "coffee --bare --compile *.coffee"
+     "prepublish": "coffee --output lib --compile src"
   },
   "keywords": [
     "bitfinex",
