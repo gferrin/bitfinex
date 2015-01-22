@@ -132,7 +132,9 @@ module.exports = class Bitfinex
 			exchange: exchange
 			side: side
 			type: type
-			is_hidden: is_hidden 
+
+		if is_hidden
+			params['is_hidden'] = true
 
 		@make_request('order/new', params, cb)  
 
