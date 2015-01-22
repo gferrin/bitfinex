@@ -119,7 +119,11 @@ module.exports = class Bitfinex
 	# ###### AUTHENTICATED REQUESTS #######
 	# #####################################   
 
-	new_order: (symbol, amount, price, exchange, side, type, cb) ->
+	new_order: (symbol, amount, price, exchange, side, type, is_hidden, cb) ->
+
+		if typeof is_hidden is 'function'
+			cb = is_hidden
+			is_hidden = false
 
 		params = 
 			symbol: symbol
@@ -128,7 +132,7 @@ module.exports = class Bitfinex
 			exchange: exchange
 			side: side
 			type: type
-			# is_hidden: is_hidden 
+			is_hidden: is_hidden 
 
 		@make_request('order/new', params, cb)  
 
