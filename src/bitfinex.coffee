@@ -83,7 +83,7 @@ module.exports = class Bitfinex
 
 	ticker: (symbol, cb) ->
 
-		@make_public_request('ticker/' + symbol, cb)
+		@make_public_request('pubticker/' + symbol, cb)
 
 	today: (symbol, cb) ->
 
