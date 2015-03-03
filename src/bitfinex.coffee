@@ -44,39 +44,39 @@ module.exports = class Bitfinex
 			'X-BFX-SIGNATURE': signature
 
 		request { url: url, method: "POST", headers: headers, timeout: 15000 }, (err,response,body)->
-		    
-            if err || (response.statusCode != 200 && response.statusCode != 400)
-                return cb new Error(err ? response.statusCode)
-                
-            try
-                result = JSON.parse(body)
-            catch error
-                return cb(null, { messsage : body.toString() } )
-            
-            if result.message?
-                return cb new Error(result.message)
+			
+			if err || (response.statusCode != 200 && response.statusCode != 400)
+				return cb new Error(err ? response.statusCode)
+				
+			try
+				result = JSON.parse(body)
+			catch error
+				return cb(null, { messsage : body.toString() } )
+			
+			if result.message?
+				return cb new Error(result.message)
 
-            cb null, result
-    
+			cb null, result
+	
 	make_public_request: (path, cb) ->
 
-		url = @url + '/v1/' + path	
+		url = @url + '/v1/' + path  
 
 		request { url: url, method: "GET", timeout: 15000}, (err,response,body)->
-		    
-		    if err || (response.statusCode != 200 && response.statusCode != 400)
-                return cb new Error(err ? response.statusCode)
-            
-            try
-                result = JSON.parse(body)
-            catch error
-                return cb(null, { messsage : body.toString() } )
+			
+			if err || (response.statusCode != 200 && response.statusCode != 400)
+				return cb new Error(err ? response.statusCode)
+			
+			try
+				result = JSON.parse(body)
+			catch error
+				return cb(null, { messsage : body.toString() } )
 
-            if result.message?
-                return cb new Error(result.message)
-            
-            cb null, result
-    
+			if result.message?
+				return cb new Error(result.message)
+			
+			cb null, result
+	
 	#####################################
 	########## PUBLIC REQUESTS ##########
 	#####################################                            
@@ -87,29 +87,50 @@ module.exports = class Bitfinex
 
 	today: (symbol, cb) ->
 
-		@make_public_request('today/' + symbol, cb)		
+		@make_public_request('today/' + symbol, cb)     
 
 	candles: (symbol, cb) ->
 
-		@make_public_request('candles/' + symbol, cb)	
+		@make_public_request('candles/' + symbol, cb)   
 
 	lendbook: (currency, cb) ->
 
-		@make_public_request('lendbook/' + currency, cb)	
+		@make_public_request('lendbook/' + currency, cb)    
 
-	orderbook: (symbol, cb) ->
+	orderbook: (symbol, options, cb) ->
 
-        maxOrders = 50
-        uri = 'book/' + symbol + '/?limit_bids=' + maxOrders + '&limit_asks=' + maxOrders
-        @make_public_request(uri, cb)
-    
+		try 
+			if typeof options is 'function'
+				limit_bids = 50
+				limit_asks = 50
+				group = 1
+				cb = options
+			else 
+				if options['limit_bids']?
+					limit_bids = options['limit_bids']
+				else 
+					limit_bids = 50
+				if options['limit_asks']?
+					limit_asks = options['limit_asks']
+				else 
+					limit_asks = 50
+				if options['group']?
+					group = options['group']
+				else 
+					group = 1
+		catch err
+			return cb(err)
+		
+		uri = 'book/' + symbol + '/?limit_bids=' + limit_bids + '&limit_asks=' + limit_asks + '&group=' + group
+		@make_public_request(uri, cb)
+	
 	trades: (symbol, cb) ->
 
 		@make_public_request('trades/' + symbol, cb)
 
 	lends: (currency, cb) ->
 
-		@make_public_request('lends/' + currency, cb)		
+		@make_public_request('lends/' + currency, cb)       
 
 	get_symbols: (cb) ->
 
@@ -165,7 +186,7 @@ module.exports = class Bitfinex
 
 		params = 
 			order_ids: order_ids.map( (id) ->
-			    return parseInt(id) )
+				return parseInt(id) )
 
 		@make_request('order/cancel/multi', params, cb)
 
@@ -247,8 +268,27 @@ module.exports = class Bitfinex
 
 	active_credits: (cb) ->
 
-	 	@make_request('credits', {}, cb) 
+		@make_request('credits', {}, cb) 
 
 	wallet_balances: (cb) ->
 
 		@make_request('balances', {}, cb)
+
+	taken_swaps: (cb) ->
+
+		@make_request('taken_swaps', {}, cb)
+
+	close_swap: (swap_id, cb) ->
+
+		@make_request('swap/close', {swap_id: swap_id}, cb)
+
+	account_infos: (cb) ->
+
+		@make_request('account_infos', {}, cb)
+
+	margin_infos: (cb) ->
+
+		@make_request('margin_infos', {}, cb)
+
+
+		
