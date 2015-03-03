@@ -32,7 +32,7 @@ running the same process twice using the same API keys.
 
 `lendbook(currency, cb)`	
 
-`orderbook(symbol, cb)`
+`orderbook(symbol, options, cb) `
 
 `trades(symbol, cb)`
 
@@ -76,3 +76,13 @@ running the same process twice using the same API keys.
 `active_credits(cb)`
 
 `wallet_balances(cb)`
+
+`taken_swaps(cb)`
+
+`close_swap(cb)`
+
+`account_infos(cb)`
+
+`margin_infos(cb)`
+
+
