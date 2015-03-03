@@ -4,7 +4,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
 request = require 'request'
 crypto = require 'crypto'
-qs = require 'querystring'
 
 module.exports = class Bitfinex
 
@@ -291,4 +290,3 @@ module.exports = class Bitfinex
 		@make_request('margin_infos', {}, cb)
 
 
-		
