@@ -40,6 +40,7 @@ running the same process twice using the same API keys.
 
 `get_symbols(cb)`
 
+`symbols_details(cb)`
 
 ##### AUTHENTICATED REQUESTS 
 
