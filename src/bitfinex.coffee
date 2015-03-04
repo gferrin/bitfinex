@@ -106,7 +106,7 @@ module.exports = class Bitfinex
 		else 
 			try 
 				for option, value of options
-					if index++ > 1
+					if index++ > 0
 						query_string += '&' + option + '=' + value
 					else
 						query_string = '/?' + option + '=' + value
