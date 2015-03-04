@@ -98,8 +98,6 @@ module.exports = class Bitfinex
 
 	orderbook: (symbol, options, cb) ->
 
-		allowed_options = ['limit_bids', 'limit_asks', 'group']
-		query_string = '/?'
 		index = 0
 		uri = 'book/' + symbol 
 
@@ -108,11 +106,10 @@ module.exports = class Bitfinex
 		else 
 			try 
 				for option, value of options
-					if option in allowed_options
-						if index++ > 1
-							query_string += '&' + option + '=' + value
-						else
-							query_string += option + '=' + value
+					if index++ > 1
+						query_string += '&' + option + '=' + value
+					else
+						query_string = '/?' + option + '=' + value
 
 				if index > 0 
 					uri += query_string
