@@ -98,29 +98,27 @@ module.exports = class Bitfinex
 
 	orderbook: (symbol, options, cb) ->
 
-		try 
-			if typeof options is 'function'
-				limit_bids = 50
-				limit_asks = 50
-				group = 1
-				cb = options
-			else 
-				if options['limit_bids']?
-					limit_bids = options['limit_bids']
-				else 
-					limit_bids = 50
-				if options['limit_asks']?
-					limit_asks = options['limit_asks']
-				else 
-					limit_asks = 50
-				if options['group']?
-					group = options['group']
-				else 
-					group = 1
-		catch err
-			return cb(err)
-		
-		uri = 'book/' + symbol + '/?limit_bids=' + limit_bids + '&limit_asks=' + limit_asks + '&group=' + group
+		allowed_options = ['limit_bids', 'limit_asks', 'group']
+		query_string = '/?'
+		index = 0
+		uri = 'book/' + symbol 
+
+		if typeof options is 'function'
+			cb = options
+		else 
+			try 
+				for option, value of options
+					if option in allowed_options
+						if index++ > 1
+							query_string += '&' + option + '=' + value
+						else
+							query_string += option + '=' + value
+
+				if index > 0 
+					uri += query_string
+			catch err
+				return cb(err)
+
 		@make_public_request(uri, cb)
 	
 	trades: (symbol, cb) ->
@@ -133,7 +131,11 @@ module.exports = class Bitfinex
 
 	get_symbols: (cb) ->
 
-		@make_public_request('symbols/', cb)
+		@make_public_request('symbols', cb)
+
+	symbols_details: (cb) ->
+
+		@make_public_request('symbols_details', cb)
 
 	# #####################################
 	# ###### AUTHENTICATED REQUESTS #######
