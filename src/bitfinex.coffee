@@ -221,9 +221,13 @@ module.exports = class Bitfinex
 		params = 
 			symbol: symbol
 			timestamp: timestamp
-			limit_trades: limit_trades
 
-		@make_request('mytrades', params, cb)  
+		if typeof limit_trades is 'function'
+			cb = limit_trades
+		else
+			params['limit_trades'] = limit_trades
+
+		@make_request('mytrades', params, cb)
 
 	new_deposit: (currency, method, wallet_name, cb) ->
 
