@@ -214,7 +214,23 @@ module.exports = class Bitfinex
 
 	active_positions: (cb) ->
 
-		@make_request('positions', {}, cb)  
+		@make_request('positions', {}, cb)
+
+	movements: (currency, options, cb) ->
+
+		params =
+			currency: currency
+
+		if typeof options is 'function'
+			cb = options
+		else
+			try
+				for option, value of options
+					params[option] = value
+			catch err
+				return cb(err)
+
+		@make_request('history/movements', params, cb)
 
 	past_trades: (symbol, timestamp, limit_trades, cb) ->
 
