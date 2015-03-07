@@ -64,7 +64,9 @@ running the same process twice using the same API keys.
 
 `active_positions(cb)`
 
-`past_trades(symbol, timestamp, limit_trades, cb)`
+`past_trades(symbol, timestamp, [limit_trades,] cb)`
+
+`mytrades(symbol, [options,] cb)`
 
 `new_offer(currency, amount, rate, period, direction, insurance_option, cb)`
 

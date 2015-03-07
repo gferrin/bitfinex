@@ -229,6 +229,22 @@ module.exports = class Bitfinex
 
 		@make_request('mytrades', params, cb)
 
+	mytrades: (symbol, options, cb) ->
+
+		params =
+			symbol: symbol
+
+		if typeof options is 'function'
+			cb = options
+		else
+			try
+				for option, value of options
+					params[option] = value
+			catch err
+				return cb(err)
+
+		@make_request('mytrades', params, cb)
+
 	new_deposit: (currency, method, wallet_name, cb) ->
 
 		params = 
