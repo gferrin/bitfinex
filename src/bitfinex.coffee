@@ -232,20 +232,7 @@ module.exports = class Bitfinex
 
 		@make_request('history/movements', params, cb)
 
-	past_trades: (symbol, timestamp, limit_trades, cb) ->
-
-		params = 
-			symbol: symbol
-			timestamp: timestamp
-
-		if typeof limit_trades is 'function'
-			cb = limit_trades
-		else
-			params['limit_trades'] = limit_trades
-
-		@make_request('mytrades', params, cb)
-
-	mytrades: (symbol, options, cb) ->
+	past_trades: (symbol, options, cb) ->
 
 		params =
 			symbol: symbol
