@@ -10,6 +10,7 @@ module.exports = class Bitfinex
 	constructor: (key, secret) ->
 
 		@url = "https://api.bitfinex.com"
+		@version = 'v1'
 		@key = key
 		@secret = secret
 		@nonce = Math.ceil((new Date()).getTime() / 1000)
@@ -23,7 +24,7 @@ module.exports = class Bitfinex
 		if !@key or !@secret
 			return cb(new Error("missing api key or secret"))
 
-		path = '/v1/' + sub_path
+		path = '/' + @version + '/' + sub_path
 		url = @url + path
 		nonce = JSON.stringify(@_nonce())
 
@@ -310,5 +311,43 @@ module.exports = class Bitfinex
 	margin_infos: (cb) ->
 
 		@make_request('margin_infos', {}, cb)
+
+	###
+		POST /v1/withdraw
+
+		Parameters:
+		'withdraw_type' :string (can be "bitcoin", "litecoin" or "darkcoin" or "mastercoin")
+		'walletselected' :string (the origin of the wallet to withdraw from, can be "trading", "exchange", or "deposit")
+		'amount' :decimal (amount to withdraw)
+		'address' :address (destination address for withdrawal)
+	###
+	withdraw: (withdraw_type, walletselected, amount, address, cb) ->
+
+		params = 
+			withdraw_type: withdraw_type
+			walletselected: walletselected
+			amount: amount
+			address: address
+
+		@make_request('withdraw', params, cb)
+
+	###
+		POST /v1/transfer
+
+		Parameters:
+		‘amount’: decimal (amount to transfer)
+		‘currency’: string, currency of funds to transfer
+		‘walletfrom’: string. Wallet to transfer from
+		‘walletto’: string. Wallet to transfer to 
+	###
+	transfer: (amount, currency, walletfrom, walletto, cb) ->
+
+		params = 
+			amount: amount
+			currency: currency
+			walletfrom: walletfrom
+			walletto: walletto
+
+		@make_request('transfer', params, cb)
 
 
