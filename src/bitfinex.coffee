@@ -214,10 +214,24 @@ module.exports = class Bitfinex
 
 	active_positions: (cb) ->
 
-		@make_request('positions', {}, cb)  
+		@make_request('positions', {}, cb)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+	movements: (currency, options, cb) ->
+
+		params =
+			currency: currency
+
+		if typeof options is 'function'
+			cb = options
+		else
+			try
+				for option, value of options
+					params[option] = value
+			catch err
+				return cb(err)
+
+		@make_request('history/movements', params, cb)
+
 	past_trades: (symbol, options, cb) ->
 
 		params =
@@ -233,21 +247,6 @@ module.exports = class Bitfinex
 				return cb(err)
 
 		@make_request('mytrades', params, cb)
-=======
-=======
->>>>>>> parent of 704f10d... Merge pull request #16 from dutu/master
-	past_trades: (symbol, timestamp, limit_trades, cb) ->
-
-		params = 
-			symbol: symbol
-			timestamp: timestamp
-			limit_trades: limit_trades
-
-		@make_request('mytrades', params, cb)  
-<<<<<<< HEAD
->>>>>>> parent of 704f10d... Merge pull request #16 from dutu/master
-=======
->>>>>>> parent of 704f10d... Merge pull request #16 from dutu/master
 
 	new_deposit: (currency, method, wallet_name, cb) ->
 
