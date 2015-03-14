@@ -23,8 +23,7 @@
     "email": "garf11235813@gmail.com"},
   "contributors": "Nick Addison",
   "dependencies": {
-    "request": "~2.30.0",
-    "crypto": "~0.0.3"
+    "request": "~2.30.0"
   },
   "repository": {
     "type": "git",
