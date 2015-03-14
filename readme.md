@@ -64,17 +64,9 @@ running the same process twice using the same API keys.
 
 `active_positions(cb)`
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 `movements(currency, [options,] cb)`
 
 `past_trades(symbol, [options,] cb)`
-=======
-`past_trades(symbol, timestamp, limit_trades, cb)`
->>>>>>> parent of 704f10d... Merge pull request #16 from dutu/master
-=======
-`past_trades(symbol, timestamp, limit_trades, cb)`
->>>>>>> parent of 704f10d... Merge pull request #16 from dutu/master
 
 `new_offer(currency, amount, rate, period, direction, insurance_option, cb)`
 
