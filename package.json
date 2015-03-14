@@ -1,6 +1,6 @@
 {
   "name": "bitfinex",
-  "version": "0.4.0",
+  "version": "0.3.8",
   "gypfile": true,
   "scripts": {
     "start": "node test.js"
