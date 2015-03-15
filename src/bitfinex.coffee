@@ -4,6 +4,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
 
 request = require 'request'
 crypto = require 'crypto'
+qs = require 'querystring'
 
 module.exports = class Bitfinex
 
@@ -273,7 +274,7 @@ module.exports = class Bitfinex
 	cancel_offer: (offer_id, cb) ->
 
 		params = 
-			order_id: offer_id
+			offer_id: offer_id
 
 		@make_request('offer/cancel', params, cb) 
 
