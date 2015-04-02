@@ -14,7 +14,7 @@ module.exports = class Bitfinex
 		@version = 'v1'
 		@key = key
 		@secret = secret
-		@nonce = Math.ceil((new Date()).getTime() / 1000)
+		@nonce = new Date().getTime()
 
 	_nonce: () ->
 
