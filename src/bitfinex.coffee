@@ -8,17 +8,14 @@ qs = require 'querystring'
 
 module.exports = class Bitfinex
 
-	constructor: (key, secret) ->
+	constructor: (key, secret, nonceGenerator) ->
 
 		@url = "https://api.bitfinex.com"
 		@version = 'v1'
 		@key = key
 		@secret = secret
 		@nonce = new Date().getTime()
-
-	_nonce: () ->
-
-		return ++@nonce
+		@_nonce = if typeof nonceGenerator is "function" then nonceGenerator else () -> return ++@nonce
 
 	make_request: (sub_path, params, cb) ->
 
