@@ -3,14 +3,12 @@
   "version": "1.0.3",
   "gypfile": true,
   "scripts": {
-    "start": "node test.js"
+    "build": "coffee --bare --compile *.coffee",
+    "prepublish": "coffee --output lib --compile src",
+    "scan_packages": "nsp check --output summary"
   },
   "description": "node.js wrapper for bitfinex cryptocurrency exchange",
   "main": "lib/bitfinex.js",
-  "scripts": {
-     "build": "coffee --bare --compile *.coffee",
-     "prepublish": "coffee --output lib --compile src"
-  },
   "keywords": [
     "bitfinex",
     "litecoin",
@@ -20,13 +18,18 @@
   ],
   "author": {
     "name": "Gabriel Ferrin",
-    "email": "garf11235813@gmail.com"},
+    "email": "garf11235813@gmail.com"
+  },
   "contributors": "Nick Addison",
   "dependencies": {
-    "request": "~2.30.0"
+    "coffee-script": "^1.10.0",
+    "request": "2.74.0"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/gferrin/bitfinex.git"
+  },
+  "devDependencies": {
+    "nsp": "^2.6.1"
   }
 }
