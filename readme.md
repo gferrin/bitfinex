@@ -1,3 +1,7 @@
+#Newer version
+There exist an official and newer version to use the `bitfinex api`:
+[https://github.com/bitfinexcom/bitfinex-api-node](bitfinex-api-node)
+
 This is a node.js wrapper for the Bitfinex [API](https://bitfinex.com/pages/api).
 
 ### Install
